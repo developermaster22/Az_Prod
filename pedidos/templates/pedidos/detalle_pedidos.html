@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle del Pedido {{ pedido.codigo }}{% endblock %}
+
+{% block content %}
+<h1>Pedido {{ pedido.codigo }}</h1>
+<p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+<p><strong>Descripción:</strong> {{ pedido.descripcion }}</p>
+<p><strong>Estado actual:</strong> {{ pedido.estado_actual }}</p>
+<p><strong>Fecha de creación:</strong> {{ pedido.fecha_creacion }}</p>
+
+{% if pedido.imagen %}
+    <p><img src="{{ pedido.imagen.url }}" alt="Imagen del pedido" style="max-width: 400px;"></p>
+{% endif %}
+
+<h2>Seguimientos</h2>
+<ul>
+    {% for seg in seguimientos %}
+        <li>
+            <strong>{{ seg.rol }}</strong> - {{ seg.usuario }} - {{ seg.estado }} - {{ seg.fecha }}<br>
+            {{ seg.comentario }}
+        </li>
+    {% empty %}
+        <li>No hay seguimientos para este pedido.</li>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'lista_pedidos' %}">Volver a la lista de pedidos</a></p>
+{% endblock %}
+
+{% if user.is_authenticated and user.groups.filter(name='Diseñador').exists %}
+  <p>Hola diseñador!</p>
+{% endif %}

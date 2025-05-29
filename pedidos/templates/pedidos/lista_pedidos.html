@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Pedidos{% endblock %}
+
+{% block content %}
+<h1>Lista de Pedidos</h1>
+
+<ul>
+    {% for pedido in pedidos %}
+        <li><a href="{% url 'detalle_pedido' pedido.codigo %}">{{ pedido.codigo }} - {{ pedido.cliente }}</a></li>
+    {% empty %}
+        <li>No hay pedidos disponibles.</li>
+    {% endfor %}
+</ul>
+
+<p><a href="{% url 'crear_pedido' %}">Crear nuevo pedido</a></p>
+
+{% if user.is_authenticated %}
+    <p>Bienvenido, {{ user.username }}!</p>
+    <p><a href="{% url 'logout' %}">Cerrar sesión</a></p>
+{% else %}
+    <p><a href="{% url 'login' %}">Iniciar sesión</a></p>
+{% endif %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

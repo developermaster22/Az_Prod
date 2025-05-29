@@ -1,0 +1,9 @@
+{% extends 'pedidos/base.html' %}
+
+{% block title %}Panel Diseñador{% endblock %}
+{% block header %}Panel del Diseñador{% endblock %}
+
+{% block content %}
+    <p>Bienvenido. Aquí verás los pedidos asignados para diseño.</p>
+    <a href="{% url 'lista_pedidos' %}" class="btn btn-info">Ir a pedidos</a>
+{% endblock %}

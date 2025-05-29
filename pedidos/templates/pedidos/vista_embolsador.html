@@ -1,0 +1,9 @@
+{% extends 'pedidos/base.html' %}
+
+{% block title %}Panel Embolsador{% endblock %}
+{% block header %}Panel del Embolsador{% endblock %}
+
+{% block content %}
+    <p>Pedidos listos para embolsar:</p>
+    <a href="{% url 'lista_pedidos' %}" class="btn btn-info">Ir a pedidos</a>
+{% endblock %}

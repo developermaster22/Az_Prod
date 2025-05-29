@@ -1,0 +1,40 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+
+{% if pedidos %}
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Estado</th>
+            <th>Creado por</th>
+            <th>Fecha de creación</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.codigo }}</td>
+            <td>{{ pedido.estado|capfirst }}</td>
+            <td>{{ pedido.creado_por.username }}</td>
+            <td>{{ pedido.creado_en|date:"d/m/Y H:i" }}</td>
+            <td>
+                <a href="{% url 'detalle_pedido' pedido.codigo %}">Ver detalles</a> |
+                <a href="{% url 'procesar_pedido' pedido.codigo %}">Procesar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No hay pedidos para mostrar.</p>
+{% endif %}
+
+{% endblock %}

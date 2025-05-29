@@ -1,0 +1,9 @@
+{% extends 'pedidos/base.html' %}
+
+{% block title %}Panel Impresor{% endblock %}
+{% block header %}Panel del Impresor{% endblock %}
+
+{% block content %}
+    <p>Consulta los archivos que debes imprimir y su estado.</p>
+    <a href="{% url 'lista_pedidos' %}" class="btn btn-info">Ver pedidos</a>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'pedidos/base.html' %}
+
+{% block title %}Panel Entelador{% endblock %}
+{% block header %}Panel del Entelador{% endblock %}
+
+{% block content %}
+    <p>Aquí puedes ver los pedidos pendientes de entelar.</p>
+    <a href="{% url 'lista_pedidos' %}" class="btn btn-info">Ir a pedidos</a>
+{% endblock %}

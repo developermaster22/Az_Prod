@@ -1,0 +1,32 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}Procesar Pedido {{ pedido.codigo }}{% endblock %}
+
+{% block content %}
+<h1>Procesar Pedido {{ pedido.codigo }}</h1>
+
+<p><strong>Estado actual:</strong> {{ pedido.estado|capfirst }}</p>
+<p><strong>Observación actual:</strong> {{ pedido.observacion }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <label>
+        <input type="radio" name="accion" value="aprobar" required>
+        Aprobar
+    </label><br>
+    <label>
+        <input type="radio" name="accion" value="devolver" required>
+        Devolver
+    </label><br>
+
+    <label for="observacion">Observación (solo si devuelve):</label><br>
+    <textarea name="observacion" id="observacion" rows="4" cols="40"></textarea><br><br>
+
+    <button type="submit">Enviar</button>
+</form>
+
+<p><a href="{% url 'dashboard' %}">Volver al dashboard</a></p>
+
+{% endblock %}

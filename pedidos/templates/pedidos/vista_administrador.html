@@ -1,0 +1,9 @@
+{% extends 'pedidos/base.html' %}
+
+{% block title %}Panel Administrador{% endblock %}
+{% block header %}Bienvenido, Administrador{% endblock %}
+
+{% block content %}
+    <p>Este es tu panel de control. Aquí puedes gestionar pedidos, usuarios y configuraciones.</p>
+    <a href="{% url 'lista_pedidos' %}" class="btn btn-primary">Ver todos los pedidos</a>
+{% endblock %}
