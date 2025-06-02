@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from functools import wraps
 from django.contrib import messages
 from django.utils import timezone
-from utils import siguiente_estado, estado_anterior
+from .utils import siguiente_estado, estado_anterior
 
 
 def group_required(group_name):
