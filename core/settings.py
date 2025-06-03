@@ -30,7 +30,7 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     os.environ.get('RENDER_EXTERNAL_HOSTNAME'),  # para Render automático
-    'az-prod.onrender.com'  # o el dominio específico de tu app
+    'https://az-prod.onrender.com'  # o el dominio específico de tu app
 ]
 
 
