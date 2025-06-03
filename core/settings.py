@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-r$9+ebyelzng*u!-7u!^)1#g!m(0d85^e5$g@nquv*_nj_(j%l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    os.environ.get('RENDER_EXTERNAL_HOSTNAME'),  # para Render automático
+    'az-prod.onrender.com'  # o el dominio específico de tu app
+]
 
 
 # Application definition
