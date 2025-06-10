@@ -10,3 +10,4 @@ class SeguimientoForm(forms.ModelForm):
     class Meta:
         model = Seguimiento
         fields = ['rol', 'usuario', 'estado', 'comentario']
+

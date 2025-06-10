@@ -3,9 +3,9 @@ from .models import Pedido, Seguimiento
 
 @admin.register(Pedido)
 class PedidoAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'cliente', 'estado_actual', 'fecha_creacion')
+    list_display = ('codigo', 'cliente', 'estado', 'fecha_creacion')
     search_fields = ('codigo', 'cliente')
-    list_filter = ('estado_actual',)
+    list_filter = ('estado',)
 
 @admin.register(Seguimiento)
 class SeguimientoAdmin(admin.ModelAdmin):
