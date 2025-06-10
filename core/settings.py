@@ -34,6 +34,8 @@ ALLOWED_HOSTS = [
 ]
 
 
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,7 +46,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'pedidos', #nuestra app de pedidos
+    'accounts',  # nuestra app de cuentas
 ]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'  # Usamos nuestro modelo de usuario personalizado
+
+LOGIN_REDIRECT_URL = '/dashboard/'
+LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
