@@ -124,6 +124,11 @@ USE_I18N = True
 USE_TZ = True
 
 
+# Authentication settings
+LOGIN_URL = 'login'            # URL para redirigir si no está autenticado
+LOGIN_REDIRECT_URL = 'lista_pedidos'   # A dónde ir después de login exitoso
+LOGOUT_REDIRECT_URL = 'login'  # A dónde ir después de logout
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 

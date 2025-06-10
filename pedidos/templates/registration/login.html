@@ -1,14 +1,36 @@
-{% extends "base.html" %}
-
-{% block content %}
-<h2>Iniciar sesión</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Entrar</button>
-</form>
-{% endblock %}
-
-{% block extra_head %}
-
-{% endblock %}
+{% extends "base.html" %} {% block content %}
+<div class="login-container">
+  <h2>Iniciar sesión</h2>
+  <form method="post" novalidate>
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Entrar</button>
+  </form>
+  {% if form.errors %}
+  <div class="alert alert-danger mt-2">
+    Por favor corrige los errores para continuar.
+  </div>
+  {% endif %}
+</div>
+{% endblock %} {% block extra_head %}
+<style>
+  .login-container {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  button.btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button.btn-primary:hover {
+    background-color: #0056b3;
+  }
+</style>
+{% endblock %} a
