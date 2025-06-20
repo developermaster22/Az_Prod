@@ -4,8 +4,7 @@ version = "0.1.0"
 description = "Sistema de Gestión de Pedidos AZ"
 authors = ["Cesar Linares <cesarlinares1522@gmail.com>"]  
 
-packages = [  # <-- Añade esta sección
-    { include = "Az_Prod" },
+packages = [ 
     { include = "accounts" },
     { include = "pedidos" },
     { include = "core" }
