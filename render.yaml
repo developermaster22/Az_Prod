@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: az-prod
+    runtime: python
+    buildCommand: "chmod +x render-build.sh && ./render-build.sh"
+    startCommand: "poetry run gunicorn core.wsgi --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHONPATH
+        value: /opt/render/project/src

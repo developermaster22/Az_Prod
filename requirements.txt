@@ -6,3 +6,4 @@ django-environ
 Pillow
 dj-database-url
 whitenoise
+poetry export -f requirements.txt --output requirements.txt
