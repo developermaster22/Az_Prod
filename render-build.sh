@@ -18,26 +18,20 @@ poetry install --no-interaction
 echo "=== Aplicando migraciones ==="
 python manage.py migrate --noinput
 
-# 4. Crear superusuario si no existe
+# 4. Crear superusuario si no existe (VERSIÓN CORREGIDA)
 echo "=== Verificando superusuario ==="
-if ! python manage.py shell -c "
+if ! python manage.py shell -c "from django.contrib.auth import get_user_model; User = get_user_model(); print(User.objects.filter(username='admin').exists())" | grep -q "True"; then
+    echo "=== Creando superusuario ==="
+    python manage.py createsuperuser \
+        --username admin \
+        --email admin@azprod.com \
+        --noinput || \
+    python manage.py shell -c "
 from django.contrib.auth import get_user_model
 User = get_user_model()
-print(User.objects.filter(username='admin').exists())
-" | grep -q "True"; then
-    echo "=== Creando superusuario ==="
-    python manage.py shell -c "
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-    User.objects.create_superuser(
-        'admin',
-        'admin@azprod.com',
-        'AzProdAdmin123!'
-    )
-    print('=== Credenciales de administración ===')
-    print('Usuario: admin')
-    print('Contraseña: AzProdAdmin123!')
-    "
+User.objects.create_superuser('admin', 'admin@azprod.com', 'AzProdAdmin123!')
+print('Superusuario creado exitosamente')
+"
 else
     echo "El superusuario 'admin' ya existe"
 fi
