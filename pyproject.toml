@@ -5,7 +5,7 @@ description = "Sistema de Gestión de Pedidos AZ"
 authors = ["Cesar Linares <cesarlinares1522@gmail.com>"]  
 
 packages = [  # <-- Añade esta sección
-    { include = "AZ_Prod" },
+    { include = "Az_Prod" },
     { include = "accounts" },
     { include = "pedidos" },
     { include = "core" }
