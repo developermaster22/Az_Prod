@@ -2,7 +2,7 @@
 name = "az-prod"
 version = "0.1.0"
 description = "Sistema de Gestión de Pedidos AZ"
-authors = ["César Linares cesarlinares1522@email.com>"]
+authors = ["César Linares <cesarlinares1522@email.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.11"
