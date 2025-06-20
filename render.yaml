@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: az-prod
+    runtime: python
+    buildCommand: "./render-build.sh"
+    startCommand: "cd AZ_Prod && poetry run gunicorn core.wsgi --bind 0.0.0.0:$PORT"
+    
