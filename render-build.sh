@@ -6,7 +6,7 @@ echo "=== Directorio actual: $(pwd) ==="
 ls -la
 
 # Entrar al directorio del proyecto
-cd AZ_Prod
+cd Az_Prod
 
 # Instalar dependencias
 poetry install --no-interaction
