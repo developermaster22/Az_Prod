@@ -2,19 +2,14 @@
 name = "az-prod"
 version = "0.1.0"
 description = "Sistema de Gestión de Pedidos AZ"
-authors = ["cesarlinares1522@email.com>"]
-readme = "README.md"
+authors = ["Tu Nombre <tu@email.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 Django = "^5.0"
 gunicorn = "^21.2.0"
-psycopg2-binary = "^2.9.9"  # Si usas PostgreSQL
-whitenoise = "^6.6.0"  # Para archivos estáticos
-
-[tool.poetry.group.dev.dependencies]
-debugpy = "^1.6.0"
+psycopg2-binary = "^2.9.9"  # Para PostgreSQL
+dj-database-url = "^2.0.0"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry]
