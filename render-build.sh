@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Debug
-echo "=== Estructura actual ==="
+# Debug: Ver estructura y variables
+echo "=== Estructura inicial ==="
 ls -la
+echo "=== Variables de entorno ==="
+printenv | grep -E 'DATABASE_URL|STATIC_'
 
-# Instalar dependencias (ya estás en /opt/render/project/src)
+# 1. Crear directorio para staticfiles
+mkdir -p staticfiles
+
+# 2. Instalar dependencias (incluyendo el paquete actual)
 poetry install --no-interaction
 
-# Migraciones (el manage.py está en la raíz)
+# 3. Aplicar migraciones
 python manage.py migrate --noinput
 
-# Archivos estáticos
-python manage.py collectstatic --noinput
+# 4. Colectar archivos estáticos (con clear)
+python manage.py collectstatic --noinput --clear
+
+# Debug final
+echo "=== Estructura final ==="
+ls -la
