@@ -1,20 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Debug: Ver estructura de archivos
-echo "=== Directorio actual: $(pwd) ==="
+# Debug
+echo "=== Estructura actual ==="
 ls -la
 
-# Entrar al directorio del proyecto
-cd Az_Prod
-
-# Instalar dependencias
+# Instalar dependencias (ya estás en /opt/render/project/src)
 poetry install --no-interaction
 
-# Aplicar migraciones
+# Migraciones (el manage.py está en la raíz)
 python manage.py migrate --noinput
 
-# Colectar archivos estáticos
+# Archivos estáticos
 python manage.py collectstatic --noinput
-
-echo "=== Build completado ==="
