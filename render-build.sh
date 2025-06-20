@@ -1,18 +1,21 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Configurar Poetry
-export PIP_USER=no
-poetry config virtualenvs.create true
-poetry config virtualenvs.in-project true
+# 1. Instalar dependencias
+poetry install --no-interaction
+poetry add psycopg2-binary
 
-# Instalar dependencias
-poetry install --no-interaction --no-ansi
+# 2. Migraciones (con reintentos)
+for i in {1..3}; do
+    python manage.py migrate --noinput && break || sleep 5
+done
 
-# Activar entorno y asegurar Gunicorn
-source .venv/bin/activate
-pip install gunicorn
+# 3. Crear superusuario (si no existe)
+python manage.py shell -c "
+from accounts.models import CustomUser
+if not CustomUser.objects.filter(username='admin').exists():
+    CustomUser.objects.create_superuser('admin', 'admin@azprod.com', 'Admin123!')
+"
 
-# Migraciones y archivos estáticos
-python manage.py migrate --noinput
-python manage.py collectstatic --noinput --clear
+# 4. Archivos estáticos
+python manage.py collectstatic --noinput

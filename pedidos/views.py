@@ -9,6 +9,10 @@ from .models import Pedido, Seguimiento
 from .forms import PedidoForm, SeguimientoForm
 from .utils import siguiente_estado, estado_anterior
 
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.db import connection
+
 
 def group_required(*group_names):
     def decorator(view_func):
