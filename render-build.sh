@@ -5,20 +5,48 @@ set -euo pipefail
 echo "=== Estructura inicial ==="
 ls -la
 echo "=== Variables de entorno ==="
-printenv | grep -E 'DATABASE_URL|STATIC_'
+printenv | grep -E 'DATABASE_URL|STATIC_|SECRET_KEY'
 
 # 1. Crear directorio para staticfiles
 mkdir -p staticfiles
 
-# 2. Instalar dependencias (incluyendo el paquete actual)
+# 2. Instalar dependencias
+echo "=== Instalando dependencias ==="
 poetry install --no-interaction
 
 # 3. Aplicar migraciones
+echo "=== Aplicando migraciones ==="
 python manage.py migrate --noinput
 
-# 4. Colectar archivos estáticos (con clear)
+# 4. Crear superusuario si no existe
+echo "=== Verificando superusuario ==="
+if ! python manage.py shell -c "
+from django.contrib.auth import get_user_model
+User = get_user_model()
+print(User.objects.filter(username='admin').exists())
+" | grep -q "True"; then
+    echo "=== Creando superusuario ==="
+    python manage.py shell -c "
+    from django.contrib.auth import get_user_model
+    User = get_user_model()
+    User.objects.create_superuser(
+        'admin',
+        'admin@azprod.com',
+        'AzProdAdmin123!'
+    )
+    print('=== Credenciales de administración ===')
+    print('Usuario: admin')
+    print('Contraseña: AzProdAdmin123!')
+    "
+else
+    echo "El superusuario 'admin' ya existe"
+fi
+
+# 5. Colectar archivos estáticos
+echo "=== Colectando archivos estáticos ==="
 python manage.py collectstatic --noinput --clear
 
 # Debug final
 echo "=== Estructura final ==="
 ls -la
+echo "=== Proceso completado ==="
