@@ -81,13 +81,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
+# Configuración mínima para desarrollo local
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+
+# O para PostgreSQL (si tienes instalado psycopg2):
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'azdb_prod',
+        'USER': 'azdb_prod_user',
+        'PASSWORD': '5H5CPJkbhOmpLl3BXgqwYO9iXwADU9s4',
+        'HOST': 'dpg-d0v2ua24d50c73e471gg-a.oregon-postgres.render.com',
+        'PORT': '5432',
+    }
 }
 
 MEDIA_URL = '/media/'
