@@ -4,6 +4,13 @@ version = "0.1.0"
 description = "Sistema de Gestión de Pedidos AZ"
 authors = ["Cesar Linares <cesarlinares1522@gmail.com>"]  
 
+packages = [  # <-- Añade esta sección
+    { include = "AZ_Prod" },
+    { include = "accounts" },
+    { include = "pedidos" },
+    { include = "core" }
+]
+
 [tool.poetry.dependencies]
 python = "^3.11"
 Django = "^5.0"
